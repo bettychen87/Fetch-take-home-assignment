@@ -3,6 +3,13 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
+receipts = {}
+
+def calculate_points(receipt_data):
+    points = 0
+
+    return points
+
 @app.route('receipt/process', methods = ['POST'])
 def process_receipts():
     receipt_data = request.get_json()
