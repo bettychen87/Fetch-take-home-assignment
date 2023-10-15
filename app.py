@@ -51,13 +51,13 @@ def process_receipts():
 
     return jsonify({"receipt_id": receipt_id})
 
-@app.route('/receipts/<int:receipt_id>/points', methods = ['GET'])
+@app.route('/receipts/<uuid:receipt_id>/points', methods = ['GET'])
 def get_receipt_points(receipt_id):
     if receipt_id not in receipts:
         return jsonify({"error": "Receipt not found"})
     else:
         receipt_points = receipts[receipt_id]["points"]
-        return jsonify({"points": receipt_points})
+        return jsonify({"points": receipt_points}), 404
 
 if __name__ == "__main__":
    app.run(debug = True)
