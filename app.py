@@ -6,7 +6,7 @@ import uuid
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-receipts = {}
+receipts = {} # to keep track of receipts by id
 
 def calculate_points(receipt_data):
     points = 0
@@ -54,10 +54,9 @@ def process_receipts():
     }
     return jsonify({"receipt_id": receipt_id})
 
-@app.route('/receipts/<uuid:receipt_id>/points', methods=['GET'])
+@app.route('/receipts/<receipt_id>/points', methods=['GET'])
 def get_receipt_points(receipt_id):
-
-    print (receipts)
+    print(receipts)
 
     if receipt_id not in receipts:
         return jsonify({"error": "Receipt not found"}), 404
