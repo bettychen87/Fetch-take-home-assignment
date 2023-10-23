@@ -1,12 +1,5 @@
-import datetime
-from flask import Flask, request, jsonify
+from datetime import datetime
 import math
-import uuid
-
-app = Flask(__name__)
-app.config["DEBUG"] = True
-
-receipts = {} # to keep track of receipts by id
 
 def calculate_points(receipt_data):
     points = 0
@@ -40,27 +33,3 @@ def calculate_points(receipt_data):
         points += 10
 
     return points
-
-@app.route('/receipts/process', methods=['POST'])
-def process_receipts():
-    receipt_data = request.get_json()
-    receipt_id = str(uuid.uuid4())
-
-    receipt_points = calculate_points(receipt_data)
-    receipts[receipt_id] = {
-        "data": receipt_data,
-        "points": receipt_points
-    }
-    return jsonify({"receipt_id": receipt_id})
-
-@app.route('/receipts/<receipt_id>/points', methods=['GET'])
-def get_receipt_points(receipt_id):
-
-    if not receipts.get(receipt_id):
-        return jsonify({"error": "Receipt not found"}), 404
-    else:
-        receipt_points = receipts[receipt_id]["points"]
-        return jsonify({"points": receipt_points})
-
-if __name__ == "__main__":
-   app.run(debug=True, port=8000)

@@ -1,0 +1,4 @@
+* No need for a database
+* Go and Docker environments are available (but will use Python and Dockerfile)
+* - Should have Dockerfile
+* Using Flask 
