@@ -7,6 +7,14 @@ from . import routes, receipts
 
 @routes.route('/receipts/process', methods=['POST'])
 def process_receipts():
+    """
+    Processes and calculate points associated with the receipt given
+    Expects a JSON payload:
+    
+
+    Returns a JSON response with the generated receipt ID
+    
+    """
     receipt_data = request.get_json()
     receipt_id = str(uuid.uuid4())
 

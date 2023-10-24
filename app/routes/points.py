@@ -4,6 +4,10 @@ from . import routes, receipts
 
 @routes.route('/receipts/<receipt_id>/points', methods=['GET'])
 def get_receipt_points(receipt_id):
+    """
+    Getting the points of the receipt
+    
+    """
 
     if not receipts.get(receipt_id):
         return jsonify({"error": "Receipt not found"}), 404
