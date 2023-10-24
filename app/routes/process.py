@@ -1,26 +1,37 @@
 import uuid
 from flask import jsonify, request
-from app.utils import calculate_points
-from app.models import receipts
-
-from . import routes, receipts
+from app.utils.calculate import calculate_points
+from app.receipts_manager import ReceiptsManager
+from . import routes
 
 @routes.route('/receipts/process', methods=['POST'])
 def process_receipts():
     """
     Processes and calculate points associated with the receipt given
     Expects a JSON payload:
-    
+        - retailer: string representing name of retailer
+        - purchaseDate: string representing purchase date of items
+        - purchaseTime: string representing purchase time of items
+        - items: list of dictionaries
+            - shortDescription: string representing a description of the item
+            - price: string presenting the price of the item
+        - total: string representing the total of the purchase
 
     Returns a JSON response with the generated receipt ID
     
     """
     receipt_data = request.get_json()
-    receipt_id = str(uuid.uuid4())
 
-    receipt_points = calculate_points(receipt_data)
-    receipts[receipt_id] = {
-        "data": receipt_data,
-        "points": receipt_points
-    }
-    return jsonify({"receipt_id": receipt_id})
+    manager = ReceiptsManager()
+
+    receipt_id = manager.process_receipt(receipt_data)
+
+    if receipt_id:
+        points = calculate_points(receipt_data)
+        response_data = {
+            "receipt_id" : receipt_id,
+            "points": points
+        }
+        return jsonify(response_data)
+    else:
+        return jsonify({"error": "Invalid receipt data"}), 400
