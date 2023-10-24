@@ -10,9 +10,8 @@ def get_receipt_points(receipt_id):
     """
     manager = ReceiptsManager()
 
-    receipt_data = manager.get_receipt_data(receipt_id)
-
-    if receipt_data:
+    if receipt_id in manager.receipts:
+        receipt_data = manager.get_receipt_data(receipt_id)
         receipt_points = receipt_data["points"]
         return jsonify({"points": receipt_points})
     else:

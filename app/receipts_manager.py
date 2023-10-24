@@ -17,7 +17,7 @@ class ReceiptsManager:
             }
             return receipt_id
         else:
-            return jsonify({"error": "Receipt invalid"}), 404
+            return None
 
     def get_receipt_data(self, receipt_id: str) -> dict:
         if receipt_id in self.receipts:

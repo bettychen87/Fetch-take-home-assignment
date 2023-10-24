@@ -28,10 +28,11 @@ def process_receipts():
 
     if receipt_id:
         points = calculate_points(receipt_data)
-        response_data = {
-            "receipt_id" : receipt_id,
+        manager.receipts[receipt_id] = {
+            "data" : receipt_data,
             "points": points
         }
-        return jsonify(response_data)
+        print(manager.receipts)
+        return jsonify({"receipt_id": receipt_id})
     else:
         return jsonify({"error": "Invalid receipt data"}), 400
