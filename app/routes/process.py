@@ -27,11 +27,6 @@ def process_receipts():
     receipt_id = manager.process_receipt(receipt_data)
 
     if receipt_id:
-        points = calculate_points(receipt_data)
-        manager.receipts[receipt_id] = {
-            "data" : receipt_data,
-            "points": points
-        }
         print(manager.receipts)
         return jsonify({"receipt_id": receipt_id})
     else:

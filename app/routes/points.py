@@ -10,11 +10,11 @@ def get_receipt_points(receipt_id):
     """
     manager = ReceiptsManager()
 
-    if receipt_id in manager.receipts:
-        receipt_data = manager.get_receipt_data(receipt_id)
-        receipt_points = receipt_data["points"]
-        return jsonify({"points": receipt_points})
-    else:
+    if receipt_id not in manager.receipts:
+        print(manager.receipts)
         return jsonify({"error": "Receipt not found"}), 404
-
-        
+    else:
+        receipt_data = manager.get_receipt_data(receipt_id)
+        receipt_points = receipt_data[receipt_id]["points"]
+        return jsonify({"points": receipt_points})
+    
