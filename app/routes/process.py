@@ -1,7 +1,7 @@
 import uuid
 from flask import jsonify, request
 from app.utils.calculate import calculate_points
-from app.receipts_manager import ReceiptsManager
+from app.receipts_manager import receipts_manager
 from . import routes
 
 @routes.route('/receipts/process', methods=['POST'])
@@ -22,12 +22,9 @@ def process_receipts():
     """
     receipt_data = request.get_json()
 
-    manager = ReceiptsManager()
-
-    receipt_id = manager.process_receipt(receipt_data)
+    receipt_id = receipts_manager.process_receipt(receipt_data)
 
     if receipt_id:
-        print(manager.receipts)
         return jsonify({"receipt_id": receipt_id})
     else:
         return jsonify({"error": "Invalid receipt data"}), 400
