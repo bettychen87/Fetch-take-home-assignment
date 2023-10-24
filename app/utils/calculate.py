@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, time
 import math
 
 def calculate_points(receipt_data):
@@ -25,9 +25,9 @@ def calculate_points(receipt_data):
     if day % 2 == 1:
         points += 6
 
-    purchase_time = datetime.datetime.strptime(receipt_data["purchaseTime"], "%H:%M").time()
-    lower_bound = datetime.time(14, 0, 0)
-    upper_bound = datetime.time(16, 0, 0)
+    purchase_time = datetime.strptime(receipt_data["purchaseTime"], "%H:%M").time()
+    lower_bound = time(14, 0, 0)
+    upper_bound = time(16, 0, 0)
 
     if lower_bound < purchase_time < upper_bound:
         points += 10
