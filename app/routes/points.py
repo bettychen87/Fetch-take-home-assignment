@@ -1,6 +1,7 @@
 from flask import jsonify
 from app.receipts_manager import receipts_manager
 from app.routes import routes
+from app.models import Receipt
 
 @routes.route('/receipts/<receipt_id>/points', methods=['GET'])
 def get_receipt_points(receipt_id):
@@ -19,5 +20,6 @@ def get_receipt_points(receipt_id):
         return jsonify({"error": "Receipt not found"}), 404
     else:
         # If the receipt is found, retrieve its points and return a JSON response.
-        receipt_points = receipts_manager.receipts[receipt_id]["points"]
+        receipt = receipts_manager.receipts[receipt_id]
+        receipt_points = receipt.points
         return jsonify({"points": receipt_points})

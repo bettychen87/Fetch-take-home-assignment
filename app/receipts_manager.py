@@ -2,6 +2,7 @@ import uuid
 from flask import jsonify
 from .utils.data_validator import validate_receipt_data
 from .utils.calculate import calculate_points
+from .models import Receipt
 
 class ReceiptsManager:
     def __init__(self):
@@ -27,13 +28,18 @@ class ReceiptsManager:
             receipt_id = str(uuid.uuid4())
 
             # Calculate points associated with the receipt.
-            receipt_points = calculate_points(receipt_data)
+            receipt = Receipt(
+                receipt_id=receipt_id,
+                retailer=receipt_data["retailer"],
+                purchase_date=receipt_data["purchaseDate"],
+                purchase_time=receipt_data["purchaseTime"],
+                items=receipt_data["items"],
+                total=float(receipt_data["total"]),
+                points=calculate_points(receipt_data)
+            )
 
             # Store the receipt and associated points.
-            self.receipts[receipt_id] = {
-                "data": receipt_data,
-                "points": receipt_points
-            }
+            self.receipts[receipt_id] = receipt
 
             return receipt_id
         else:
@@ -51,7 +57,7 @@ class ReceiptsManager:
             dict: The receipt data associated with the given receipt ID.
         """
         if receipt_id in self.receipts:
-            return self.receipts[receipt_id]
+            return self.receipts[receipt_id].to_dict() 
         else:
             # If the receipt ID is not found, return an error response with HTTP status code 404.
             return jsonify({"error": "Receipt not found"}), 404

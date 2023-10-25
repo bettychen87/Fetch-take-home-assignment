@@ -37,6 +37,11 @@ class TestGetReceiptPoints(unittest.TestCase):
         json_data = response.get_json()
         self.assertEqual(response.status_code, 200)
         self.assertIn("points", json_data)
+    
+    def tearDown(self):
+        # Clean up by removing the test receipt after the test is done
+        if self.receipt_id in self.manager.receipts:
+            del self.manager.receipts[self.receipt_id]
 
 if __name__ == '__main__':
     unittest.main()

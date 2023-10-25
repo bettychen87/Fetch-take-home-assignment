@@ -51,6 +51,6 @@ class TestReceiptsProcessing(unittest.TestCase):
 
         # Capture the generated receipt_id for testing
         self.receipt_id = json_data["receipt_id"]
-
+        
 if __name__ == '__main__':
     unittest.main()

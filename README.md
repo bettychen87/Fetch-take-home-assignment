@@ -9,7 +9,7 @@
 2. Build Docker Image:
 - Navigate to the project directory
 ```
-cd fetch-take-home-assignment
+cd Fetch-take-home-assignment
 ```
 - Run the following command to build the Docker image:
 ```

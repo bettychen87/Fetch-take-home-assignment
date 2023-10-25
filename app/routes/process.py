@@ -1,8 +1,7 @@
-import uuid
 from flask import jsonify, request
-from app.utils.calculate import calculate_points
 from app.receipts_manager import receipts_manager
 from . import routes
+from app.models import Receipt
 
 @routes.route('/receipts/process', methods=['POST'])
 def process_receipts():
