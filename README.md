@@ -18,7 +18,7 @@ docker build -t receipt-processor .
 3. Run Docker Container:
 - Run the following command to start the container:
 ```
-docker run -d -p 8000:8000 receipt-process
+docker run -d -p 8000:8000 receipt-processor
 ```
 4. Accessing the Application:
 - The application can be accessed at http://localhost:8000
