@@ -28,11 +28,6 @@ docker run -d -p 8000:8000 receipt-process
 5. Testing Application
 - [Postman](https://www.postman.com/) can be used to make sure the the endpoints work.
 - tester.py can also be used to test the API.
-  - Run server.py
-  ```
-  python3 server.py
-  ```
-  - Run tester.py
-  ```
-  python3 tester.py
-  ```
+```
+python3 tester.py
+```
