@@ -4,8 +4,12 @@ from app.receipts_manager import ReceiptsManager
 
 class TestGetReceiptPoints(unittest.TestCase):
     def setUp(self):
+        # Create a test client for the Flask app
         self.app = create_app().test_client()
+
+        # Create an instance of ReceiptsManager
         self.manager = ReceiptsManager()
+
         # Process a receipt to get a receipt_id for testing
         data = {
             "retailer": "Test Retailer",
@@ -28,7 +32,7 @@ class TestGetReceiptPoints(unittest.TestCase):
         self.receipt_id = json_data["receipt_id"]  # Capture the receipt_id
 
     def test_getting_points(self):
-        # Now you can use self.receipt_id in your test
+        # Use self.receipt_id in your test to retrieve receipt points
         response = self.app.get(f'/receipts/{self.receipt_id}/points')
         json_data = response.get_json()
         self.assertEqual(response.status_code, 200)

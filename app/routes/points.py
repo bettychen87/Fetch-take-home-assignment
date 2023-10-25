@@ -5,13 +5,19 @@ from app.routes import routes
 @routes.route('/receipts/<receipt_id>/points', methods=['GET'])
 def get_receipt_points(receipt_id):
     """
-    Getting the points of the receipt
-    
-    """
+    Retrieve the points associated with a specific receipt.
 
+    Args:
+        receipt_id (str): The unique identifier of the receipt.
+
+    Returns:
+        JSON response: A JSON response containing the points of the receipt, or an error message if not found.
+    """
+    # Check if the receipt ID exists in the receipts.
     if receipt_id not in receipts_manager.receipts:
+        # If not found, return an error response with HTTP status code 404.
         return jsonify({"error": "Receipt not found"}), 404
     else:
+        # If the receipt is found, retrieve its points and return a JSON response.
         receipt_points = receipts_manager.receipts[receipt_id]["points"]
         return jsonify({"points": receipt_points})
-    

@@ -2,3 +2,6 @@
 * Go and Docker environments are available (but will use Python and Dockerfile)
 * - Should have Dockerfile
 * Using Flask 
+* - I chose to use Flask because I was most familiar with it.
+* - Flask is simple and minimalistic, making it the fastest to use.
+* - Flask provides excellent support for unit testing.
