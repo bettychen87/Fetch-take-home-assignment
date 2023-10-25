@@ -3,7 +3,7 @@
 ## Setup and Running Instructions
 
 1. Prequisites:
-- Ensure that you have [Docker] ((https://www.docker.com/) installed on your machine.
+- Ensure that you have [Docker]((https://www.docker.com/) installed on your machine.
 - Clone the project repository
 
 2. Build Docker Image:
