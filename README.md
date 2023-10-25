@@ -21,9 +21,9 @@ docker build -t receipt-processor .
 docker run -d -p 8000:8000 receipt-processor
 ```
 4. Accessing the Application:
-- The application can be accessed at http://localhost:8000
-- http://localhost:8000/receipts/process for receipt processing
-- http://localhost:8000/receipts/{receipt_id}/points for getting points
+- The application can be accessed at http://127.0.0.1:8000
+- http://127.0.0.1:8000/receipts/process for receipt processing
+- http://127.0.0.1:8000/receipts/{receipt_id}/points for getting points
 
 5. Testing Application
 - [Postman](https://www.postman.com/) can be used to make sure the the endpoints work.
